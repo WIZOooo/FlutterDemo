@@ -4,13 +4,18 @@ import 'material_route_sub_page.dart';
 
 class MaterialRouteHomePage extends StatefulWidget {
   MaterialRouteHomePage({Key? key}) : super(key: key);
+
   @override
   _MaterialRouteHomePageState createState() => _MaterialRouteHomePageState();
 }
 
 class _MaterialRouteHomePageState extends State<MaterialRouteHomePage> {
   void _router() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MaterialRouteSubPage(),),);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MaterialRouteSubPage(),
+      ),
+    );
   }
 
   @override
