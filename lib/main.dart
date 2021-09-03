@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_route_demo/material_route_demo/material_route_home_page.dart';
+import 'package:material_route_demo/index_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           },
         ),
       ),
-      home: MaterialRouteHomePage(),
+      home: IndexPage(),
     );
   }
 }
