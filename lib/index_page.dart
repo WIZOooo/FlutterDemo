@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:material_route_demo/Navigation/popWithResult/pop_with_result.dart';
+import 'package:material_route_demo/Navigation/routesetting_transfer_param/routesetting_transfer_param.dart';
 import 'package:material_route_demo/material_route_demo/material_route_home_page.dart';
 
 final List<IndexPageItem> pageItemList = [
   IndexPageItem(
-    itemName: 'Material Route Demo',
+    itemName: '使用Material Route跳转',
     targetWidget: MaterialRouteHomePage(),
   ),
+  IndexPageItem(
+    itemName: 'Navigation / 从一个页面返回数据',
+    targetWidget: HomeScreen(),
+  ),
+  IndexPageItem(
+    itemName: 'Navigation / 使用RouteSetting传递参数',
+    targetWidget: TodosScreen(
+      todos: List.generate(
+        20,
+        (i) => Todo(
+          'Todo $i',
+          'A description of what needs to be done for Todo $i',
+        ),
+      ),
+    ),
+  )
 ];
 
 class IndexPage extends StatelessWidget {
@@ -57,7 +75,7 @@ class IndexPageItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Text(
           itemName,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ),
     );
