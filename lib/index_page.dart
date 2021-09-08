@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_route_demo/Navigation/popWithResult/pop_with_result.dart';
 import 'package:material_route_demo/Navigation/routesetting_transfer_param/routesetting_transfer_param.dart';
 import 'package:material_route_demo/material_route_demo/material_route_home_page.dart';
+import 'package:material_route_demo/scroll_extra_space/scroll_extra_space.dart';
 
 final List<IndexPageItem> pageItemList = [
   IndexPageItem(
@@ -23,6 +24,10 @@ final List<IndexPageItem> pageItemList = [
         ),
       ),
     ),
+  ),
+  IndexPageItem(
+    itemName: 'Bug / tabView多余滚动去除',
+    targetWidget: ScrollExtraSpaceHomePage(title: 'Flutter Demo Home Page'),
   )
 ];
 
