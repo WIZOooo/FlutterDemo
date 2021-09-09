@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:material_route_demo/Navigation/popWithResult/pop_with_result.dart';
 import 'package:material_route_demo/Navigation/routesetting_transfer_param/routesetting_transfer_param.dart';
 import 'package:material_route_demo/material_route_demo/material_route_home_page.dart';
+import 'package:material_route_demo/nestedScroll_view_demo/nestedScroll_view_demo.dart';
 import 'package:material_route_demo/scroll_extra_space/scroll_extra_space.dart';
+import 'package:material_route_demo/sliverfillingremain_scroll_async/sliverfillingremain_scroll_async.dart';
 
 final List<IndexPageItem> pageItemList = [
   IndexPageItem(
@@ -28,7 +30,15 @@ final List<IndexPageItem> pageItemList = [
   IndexPageItem(
     itemName: 'Bug / tabView多余滚动去除',
     targetWidget: ScrollExtraSpaceHomePage(title: 'Flutter Demo Home Page'),
-  )
+  ),
+  IndexPageItem(
+    itemName: 'NestedScrollViewDemo',
+    targetWidget: NestedScrollViewDemoPage(),
+  ),
+  IndexPageItem(
+    itemName: 'NestedScrollView中使用SliverFillRemaining导致内外层滚动割裂',
+    targetWidget: SliverFillingRemainScrollAsyncPage(title: 'SliverFillingRemainScrollAsyncPage',),
+  ),
 ];
 
 class IndexPage extends StatelessWidget {
