@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+final GlobalKey<NestedScrollViewState> globalKey = GlobalKey();
 
 ListView listView = ListView.separated(
   // physics: NeverScrollableScrollPhysics(),
   // shrinkWrap: true,
+  // controller: globalKey.currentState!.innerController,
   itemBuilder: (context, index) => Text(
     "Hello friend $index",
   ),
@@ -13,22 +16,32 @@ ListView listView = ListView.separated(
   itemCount: 100,
 );
 
-List<Widget> tabWidgets = <Widget>[
-  listView,
-  listView,
-  listView,
-  listView
-];
+List<Widget> tabWidgets = <Widget>[listView, listView, listView, listView];
+
+SliverList sliverList = SliverList(
+  delegate: SliverChildBuilderDelegate(
+    (BuildContext context, int index) {
+      return Text(
+        'Hello friend $index',
+      );
+    },
+    childCount: 50,
+  ),
+);
 
 class SliverFillingRemainScrollAsyncPage extends StatefulWidget {
-  SliverFillingRemainScrollAsyncPage({Key? key, required this.title}) : super(key: key);
+  SliverFillingRemainScrollAsyncPage({Key? key, required this.title})
+      : super(key: key);
   final String title;
 
   @override
-  _SliverFillingRemainScrollAsyncPageState createState() => _SliverFillingRemainScrollAsyncPageState();
+  _SliverFillingRemainScrollAsyncPageState createState() =>
+      _SliverFillingRemainScrollAsyncPageState();
 }
 
-class _SliverFillingRemainScrollAsyncPageState extends State<SliverFillingRemainScrollAsyncPage> with SingleTickerProviderStateMixin {
+class _SliverFillingRemainScrollAsyncPageState
+    extends State<SliverFillingRemainScrollAsyncPage>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
   late ScrollController _scrollViewController;
 
@@ -54,7 +67,8 @@ class _SliverFillingRemainScrollAsyncPageState extends State<SliverFillingRemain
         title: Text('scroll extra space'),
       ),
       body: NestedScrollView(
-        controller: _scrollViewController,
+        key: globalKey,
+        // controller: _scrollViewController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverOverlapAbsorber(
@@ -69,16 +83,20 @@ class _SliverFillingRemainScrollAsyncPageState extends State<SliverFillingRemain
                   bottom: TabBar(
                     tabs: <Widget>[
                       Tab(
-                        icon: Icon(Icons.description, color: Theme.of(context).accentColor),
+                        icon: Icon(Icons.description,
+                            color: Theme.of(context).accentColor),
                       ),
                       Tab(
-                        icon: Icon(Icons.timer, color: Theme.of(context).accentColor),
+                        icon: Icon(Icons.timer,
+                            color: Theme.of(context).accentColor),
                       ),
                       Tab(
-                        icon: Icon(Icons.ondemand_video, color: Theme.of(context).accentColor),
+                        icon: Icon(Icons.ondemand_video,
+                            color: Theme.of(context).accentColor),
                       ),
                       Tab(
-                        icon: Icon(Icons.photo_camera, color: Theme.of(context).accentColor),
+                        icon: Icon(Icons.photo_camera,
+                            color: Theme.of(context).accentColor),
                       ),
                     ],
                     controller: tabController,
@@ -94,11 +112,30 @@ class _SliverFillingRemainScrollAsyncPageState extends State<SliverFillingRemain
                 child: Builder(
                   builder: (BuildContext context) {
                     return CustomScrollView(
+                      physics: NeverScrollableScrollPhysics(),
+                      primary: false,
+                      controller: ScrollController(),
                       slivers: <Widget>[
                         SliverOverlapInjector(
-                          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                          handle:
+                              NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                  context),
                         ),
-                        SliverToBoxAdapter(child: w)
+                        SliverFillRemaining(
+                          child: SmartRefresher(
+                            enablePullUp: true,
+                            enablePullDown: true,
+                            controller: RefreshController(),
+                            child: CustomScrollView(
+                              controller: globalKey.currentState!.innerController,
+                              primary: false,
+                              slivers: [
+                                sliverList,
+                              ],
+                            ),
+                          ),
+                        ),
+                        // SliverFillRemaining(child: w)
                       ],
                     );
                   },
@@ -179,7 +216,8 @@ class _SliverTabBarViewDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Material(
       child: child,
       elevation: 200,
