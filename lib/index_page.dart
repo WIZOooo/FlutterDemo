@@ -36,7 +36,7 @@ final List<IndexPageItem> pageItemList = [
     targetWidget: NestedScrollViewDemoPage(),
   ),
   IndexPageItem(
-    itemName: 'NestedScrollView中使用SliverFillRemaining导致内外层滚动割裂',
+    itemName: 'NestedScrollView的Body中含有多层滚动视图导致内外层滚动割裂',
     targetWidget: SliverFillingRemainScrollAsyncPage(title: 'SliverFillingRemainScrollAsyncPage',),
   ),
 ];
