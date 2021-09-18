@@ -6,6 +6,8 @@ import 'package:material_route_demo/nestedScroll_view_demo/nestedScroll_view_dem
 import 'package:material_route_demo/scroll_extra_space/scroll_extra_space.dart';
 import 'package:material_route_demo/sliverfillingremain_scroll_async/sliverfillingremain_scroll_async.dart';
 
+import 'nestedscrollview_scroll_sync/nestedscrollview_scroll_sync.dart';
+
 final List<IndexPageItem> pageItemList = [
   IndexPageItem(
     itemName: '使用Material Route跳转',
@@ -28,18 +30,36 @@ final List<IndexPageItem> pageItemList = [
     ),
   ),
   IndexPageItem(
-    itemName: 'Bug / tabView多余滚动去除',
-    targetWidget: ScrollExtraSpaceHomePage(title: 'Flutter Demo Home Page'),
-  ),
-  IndexPageItem(
     itemName: 'NestedScrollViewDemo',
     targetWidget: NestedScrollViewDemoPage(),
   ),
   IndexPageItem(
-    itemName: 'NestedScrollView的Body中含有多层滚动视图导致内外层滚动割裂',
+    itemName: 'Bug / tabView多余滚动去除',
+    targetWidget: ScrollExtraSpaceHomePage(title: 'Flutter Demo Home Page'),
+  ),
+  IndexPageItem(
+    itemName: 'Bug / NestedScrollView的Body中含有多层滚动视图导致内外层滚动割裂',
     targetWidget: SliverFillingRemainScrollAsyncPage(title: 'SliverFillingRemainScrollAsyncPage',),
   ),
+  IndexPageItem(
+    itemName: 'Bug / NestedScrollView嵌套tabView导致子tab之间滚动相互影响',
+    targetWidget: NestedScrollViewTabViewScrollSync(title: 'NestedScrollViewTabViewScrollSync',),
+  ),
 ];
+
+ListView pageContentListView = ListView.separated(
+  padding: EdgeInsets.symmetric(horizontal: 20),
+  itemBuilder: (context, index) {
+    return pageItemList[index];
+  },
+  separatorBuilder: (context, index) => Container(
+    color: Colors.blueGrey,
+    height: 1,
+  ),
+  itemCount: pageItemList.length,
+);
+
+
 
 class IndexPage extends StatelessWidget {
   IndexPage({
@@ -52,16 +72,9 @@ class IndexPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Index Page'),
       ),
-      body: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        itemBuilder: (context, index) {
-          return pageItemList[index];
-        },
-        separatorBuilder: (context, index) => Container(
-          color: Colors.blueGrey,
-          height: 1,
-        ),
-        itemCount: pageItemList.length,
+      body: SizedBox(
+        width: 500,
+          child: pageContentListView,//myWidget(context),
       ),
     );
   }
