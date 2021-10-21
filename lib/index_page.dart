@@ -39,11 +39,21 @@ final List<IndexPageItem> pageItemList = [
   ),
   IndexPageItem(
     itemName: 'Bug / NestedScrollView的Body中含有多层滚动视图导致内外层滚动割裂',
-    targetWidget: SliverFillingRemainScrollAsyncPage(title: 'SliverFillingRemainScrollAsyncPage',),
+    targetWidget: SliverFillingRemainScrollAsyncPage(
+      title: 'SliverFillingRemainScrollAsyncPage',
+    ),
   ),
   IndexPageItem(
     itemName: 'Bug / NestedScrollView嵌套tabView导致子tab之间滚动相互影响',
-    targetWidget: NestedScrollViewTabViewScrollSync(title: 'NestedScrollViewTabViewScrollSync',),
+    targetWidget: NestedScrollViewTabViewScrollSync(
+      title: 'NestedScrollViewTabViewScrollSync',
+    ),
+  ),
+  IndexPageItem(
+    itemName: 'Flutter实战 / AnimatedListDemo',
+    targetWidget: NestedScrollViewTabViewScrollSync(
+      title: 'NestedScrollViewTabViewScrollSync',
+    ),
   ),
 ];
 
@@ -59,8 +69,6 @@ ListView pageContentListView = ListView.separated(
   itemCount: pageItemList.length,
 );
 
-
-
 class IndexPage extends StatelessWidget {
   IndexPage({
     Key? key,
@@ -72,10 +80,7 @@ class IndexPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Index Page'),
       ),
-      body: SizedBox(
-        width: 500,
-          child: pageContentListView,//myWidget(context),
-      ),
+      body: pageContentListView,
     );
   }
 }
@@ -108,4 +113,30 @@ class IndexPageItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class UnitPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    // print(
+    //     "=====shrinkOffset:$shrinkOffset======overlapsContent:$overlapsContent====");
+    // final String info =
+    //     'shrinkOffset:${shrinkOffset.toStringAsFixed(1)}'
+    //     '\noverlapsContent:$overlapsContent';
+
+    return Container(
+      alignment: Alignment.center,
+      child: Text('Header: Pinned 100高度'),
+      color: Colors.red.withOpacity(0.4),
+    );
+  }
+
+  @override
+  double get maxExtent => 100;
+
+  @override
+  double get minExtent => 100;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
 }

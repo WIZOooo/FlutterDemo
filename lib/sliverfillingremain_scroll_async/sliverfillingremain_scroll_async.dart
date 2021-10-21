@@ -64,7 +64,7 @@ class _SliverFillingRemainScrollAsyncPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('scroll extra space'),
+        title: Text('滚动割裂'),
       ),
       body: NestedScrollView(
         key: globalKey,
@@ -112,9 +112,9 @@ class _SliverFillingRemainScrollAsyncPageState
                 child: Builder(
                   builder: (BuildContext context) {
                     return CustomScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      primary: false,
-                      controller: ScrollController(),
+                      // physics: NeverScrollableScrollPhysics(),
+                      // primary: false,
+                      // controller: ScrollController(),
                       slivers: <Widget>[
                         SliverOverlapInjector(
                           handle:
@@ -122,17 +122,12 @@ class _SliverFillingRemainScrollAsyncPageState
                                   context),
                         ),
                         SliverFillRemaining(
-                          child: SmartRefresher(
-                            enablePullUp: true,
-                            enablePullDown: true,
-                            controller: RefreshController(),
-                            child: CustomScrollView(
-                              controller: globalKey.currentState!.innerController,
-                              primary: false,
-                              slivers: [
-                                sliverList,
-                              ],
-                            ),
+                          child: CustomScrollView(
+                            // controller: globalKey.currentState!.innerController,
+                            // primary: false,
+                            slivers: [
+                              sliverList,
+                            ],
                           ),
                         ),
                         // SliverFillRemaining(child: w)
