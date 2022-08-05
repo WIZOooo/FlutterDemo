@@ -3,12 +3,17 @@ import 'package:material_route_demo/Navigation/popWithResult/pop_with_result.dar
 import 'package:material_route_demo/Navigation/routesetting_transfer_param/routesetting_transfer_param.dart';
 import 'package:material_route_demo/material_route_demo/material_route_home_page.dart';
 import 'package:material_route_demo/nestedScroll_view_demo/nestedScroll_view_demo.dart';
+import 'package:material_route_demo/provider/provider_page.dart';
 import 'package:material_route_demo/scroll_extra_space/scroll_extra_space.dart';
 import 'package:material_route_demo/sliverfillingremain_scroll_async/sliverfillingremain_scroll_async.dart';
 
 import 'nestedscrollview_scroll_sync/nestedscrollview_scroll_sync.dart';
 
 final List<IndexPageItem> pageItemList = [
+  IndexPageItem(
+    itemName: 'Provider',
+    targetWidget: ProviderPage(),
+  ),
   IndexPageItem(
     itemName: '使用Material Route跳转',
     targetWidget: MaterialRouteHomePage(),
