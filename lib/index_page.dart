@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_route_demo/Navigation/popWithResult/pop_with_result.dart';
 import 'package:material_route_demo/Navigation/routesetting_transfer_param/routesetting_transfer_param.dart';
+import 'package:material_route_demo/dynamic_data_and_seperator/dynamic_data_page.dart';
 import 'package:material_route_demo/material_route_demo/material_route_home_page.dart';
 import 'package:material_route_demo/nestedScroll_view_demo/nestedScroll_view_demo.dart';
 import 'package:material_route_demo/provider/provider_page.dart';
@@ -11,11 +12,15 @@ import 'nestedscrollview_scroll_sync/nestedscrollview_scroll_sync.dart';
 
 final List<IndexPageItem> pageItemList = [
   IndexPageItem(
-    itemName: 'Provider',
+    itemName: '项目实践 / 列表动态生成item，并动态处理分割线',
+    targetWidget: DynamicDataPage(),
+  ),
+  IndexPageItem(
+    itemName: '三方库学习 / Provider',
     targetWidget: ProviderPage(),
   ),
   IndexPageItem(
-    itemName: '使用Material Route跳转',
+    itemName: 'Navigation / 使用Material Route跳转',
     targetWidget: MaterialRouteHomePage(),
   ),
   IndexPageItem(
